@@ -1,9 +1,9 @@
-package parser.validator;
+package projectParser.validator;
 
 import java.io.File;
 import java.util.Set;
 
-class ParserValidatorImpl implements ParserValidator {
+class ProjectParserValidatorImpl implements ProjectParserValidator {
     @Override
     public ValidationResult validate(String absoluePath) {
         File root = new File(absoluePath);

@@ -1,12 +1,12 @@
-package parser;
+package projectParser;
 
 import core.VirtualDir;
 import core.VirtualFile;
 import core.VirtualFileMetadata;
 import core.VirtualProject;
 import org.apache.commons.io.FilenameUtils;
-import parser.validator.ParserValidator;
-import parser.validator.ValidationResult;
+import projectParser.validator.ProjectParserValidator;
+import projectParser.validator.ValidationResult;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,14 +15,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import static parser.utils.ParserUtils.getNameForFolder;
+import static projectParser.utils.ProjectParserUtils.getNameForFolder;
 
 class ProjectParserImpl implements ProjectParser {
-    private final ParserValidator parserValidator;
+    private final ProjectParserValidator parserValidator;
     public static final String BLANK = "BLANK";
 
-    public ProjectParserImpl(ParserValidator parserValidator) {
-        this.parserValidator = parserValidator;
+    public ProjectParserImpl(ProjectParserValidator projectParserValidator) {
+        this.parserValidator = projectParserValidator;
     }
 
     @Override
@@ -57,6 +57,7 @@ class ProjectParserImpl implements ProjectParser {
                 VirtualFileMetadata metadata = new VirtualFileMetadata();
                 metadata.setExtension(FilenameUtils.getExtension(f.getName()));
                 metadata.setSize(f.length());
+                metadata.setLastModified(f.lastModified());
                 file.setMetadata(metadata);
                 parentDir.addFile(file);
             }

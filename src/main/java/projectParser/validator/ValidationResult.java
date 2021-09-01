@@ -1,4 +1,4 @@
-package parser.validator;
+package projectParser.validator;
 
 import java.util.Set;
 

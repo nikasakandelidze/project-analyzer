@@ -3,6 +3,7 @@ package core;
 public class VirtualFileMetadata {
     private long size;
     private String extension;
+    private long lastModified;
 
     public double getSize() {
         return size;
@@ -18,6 +19,14 @@ public class VirtualFileMetadata {
 
     public void setExtension(String extension) {
         this.extension = extension;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
     }
 
     @Override

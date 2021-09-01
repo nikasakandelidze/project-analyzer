@@ -1,10 +1,10 @@
-package parser.utils;
+package projectParser.utils;
 
 import java.io.File;
 import java.util.Optional;
 
-public class ParserUtils {
-    private ParserUtils() {
+public class ProjectParserUtils {
+    private ProjectParserUtils() {
     }
 
     public static Optional<String> getNameForFolder(String pathToFolder) {

@@ -1,4 +1,4 @@
-# Project Analyzer
+# Project analyzer
 
 # Module 1: Parser
 ### * Notice: Algorithm will be modified for working on huge projects with big data.
@@ -9,3 +9,7 @@
 # Module 2: Core
 
 Analyze parsed data. make asumptions, create statistics, heatmaps, history of the project and etc.
+
+# Module 3: Processor
+
+Takes "Virtual Project" as an input and using bunch of processings and calculations outputs useful data
