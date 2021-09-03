@@ -21,20 +21,20 @@ This will create build directory in the root of the project and then use:
 java -jar build/libs/XXX.jar to run the application
 
 # Current Present Commands:
-Name: COUNT_WITH_EXTENSION.
-Command: find -xc {arg}.
+#### Name: COUNT_WITH_EXTENSION.
+#### Command: find -xc {arg}.
 Details:  Command: "find -xc arg?". (Where "arg" is optional. flags: x - for extension, c - for count). If argument is specified finds count of number of files with specified "arg" extension, if no arg is specified command will print all extension and according counts for all of them.
 
-Name: LS_WITH_EXTENSION.
-Command: find -lc {arg}.
+#### Name: LS_WITH_EXTENSION.
+#### Command: find -lc {arg}.
 Details:  Command: "find -xl arg". (Where "arg" is mandatory. flags: x - for extension, l - for list). Finds and lists all of file names that have extension as one specified in "arg" argument.
 
-Name: COUNT_ALL_EXTENSIONS.
-Command: find -xc.
+#### Name: COUNT_ALL_EXTENSIONS.
+#### Command: find -xc.
 Details:  Command: "find -xc arg?". (Where "arg" is optional. flags: x - for extension, c - for count). If argument is specified finds count of number of files with specified "arg" extension, if no arg is specified command will print all extension and according counts for all of them.
 
-Name: EXIT.
-Command: exit.
+#### Name: EXIT.
+#### Command: exit.
 Details:  Command: "exit". Exits CLI program.
 
 
