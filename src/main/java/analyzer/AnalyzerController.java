@@ -9,6 +9,7 @@ import presenter.Presenter;
 import projectParser.ProjectParser;
 import projectParser.validator.ProjectParserValidator;
 import service.VirtualProjectProcessor;
+import service.help.HelpMessage;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
@@ -55,6 +56,10 @@ public class AnalyzerController {
                             .max(Comparator.comparingInt(Tuple::getSecond));
                     Tuple<String, Integer> stringIntegerTuple = max.get();
                     presenter.showMessage("Extension with most files: " + stringIntegerTuple.getFirst() + ", Count: " + stringIntegerTuple.getSecond());
+                } else if (inputMessageType == InputMessageType.HELP) {
+                    String helpDirective = input.getArguments().get(0);
+                    HelpMessage helpMessage = processor.buildHelpMessage();
+                    presenter.showMessage(helpMessage.getMessage());
                 } else if (inputMessageType == InputMessageType.EXIT) {
                     presenter.showMessage("Exiting file analyzer.");
                     break;

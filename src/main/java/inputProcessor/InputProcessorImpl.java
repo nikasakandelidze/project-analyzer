@@ -24,6 +24,9 @@ class InputProcessorImpl implements InputProcessor {
         } else if (line.contains("find -xl ")) {
             String extension = line.substring(9);
             return new InputMessage(InputMessageType.LS_WITH_EXTENSION, List.of(extension));
+        } else if (line.contains("help")) {
+            String helpDirective = line.trim().substring(4);
+            return new InputMessage(InputMessageType.HELP, List.of(helpDirective));
         } else if (line.contains("exit")) {
             return new InputMessage(InputMessageType.EXIT, List.of());
         } else {
