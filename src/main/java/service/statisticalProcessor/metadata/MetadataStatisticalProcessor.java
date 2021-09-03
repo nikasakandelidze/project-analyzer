@@ -1,10 +1,10 @@
 package service.statisticalProcessor.metadata;
 
 import domain.VirtualProject;
-import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
 public interface MetadataStatisticalProcessor {
-    ExtensionsStatisticsModel calculateExtensions(VirtualProject project);
+    FileExtensionsStatisticsModel calculateExtensions(VirtualProject project);
 
     static MetadataStatisticalProcessor create() {
         return new MetadataStaticsticalProcessorImpl();

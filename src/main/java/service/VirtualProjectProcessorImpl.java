@@ -3,7 +3,7 @@ package service;
 import domain.VirtualProject;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.MetadataStatisticalProcessor;
-import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
 class VirtualProjectProcessorImpl implements VirtualProjectProcessor {
     private final MetadataStatisticalProcessor metadataStatisticalProcessor;
@@ -14,8 +14,7 @@ class VirtualProjectProcessorImpl implements VirtualProjectProcessor {
 
     @Override
     public ProcessorMessage processVirtualProject(VirtualProject project) {
-        ExtensionsStatisticsModel extensionsStatisticsModel = metadataStatisticalProcessor.calculateExtensions(project);
-        ProcessorMessage message = new ProcessorMessage(extensionsStatisticsModel);
-        return message;
+        FileExtensionsStatisticsModel fileExtensionsStatisticsModel = metadataStatisticalProcessor.calculateExtensions(project);
+        return new ProcessorMessage(fileExtensionsStatisticsModel);
     }
 }

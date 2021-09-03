@@ -14,9 +14,13 @@ class InputProcessorImpl implements InputProcessor {
     public InputMessage getInput() {
         System.out.print(">");
         String line = scanner.nextLine();
-        if (line.contains("find -xc ")) {
-            String extension = line.substring(9);
-            return new InputMessage(InputMessageType.COUNT_WITH_EXTENSION, List.of(extension));
+        if (line.contains("find -xc")) {
+            if (line.length() == 8) {
+                return new InputMessage(InputMessageType.COUNT_ALL_EXTENSIONS, List.of());
+            } else {
+                String extension = line.substring(9);
+                return new InputMessage(InputMessageType.COUNT_WITH_EXTENSION, List.of(extension));
+            }
         } else if (line.contains("find -xl ")) {
             String extension = line.substring(9);
             return new InputMessage(InputMessageType.LS_WITH_EXTENSION, List.of(extension));

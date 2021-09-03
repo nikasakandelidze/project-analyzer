@@ -1,6 +1,6 @@
 package common;
 
-public class Tuple<T,U>{
+public class Tuple<T, U> {
     private final T first;
     private final U second;
 
@@ -16,4 +16,5 @@ public class Tuple<T,U>{
     public U getSecond() {
         return second;
     }
+    
 }

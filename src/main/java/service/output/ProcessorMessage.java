@@ -1,13 +1,13 @@
 package service.output;
 
-import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
 import java.util.Optional;
 
 public class ProcessorMessage {
-    private final Optional<ExtensionsStatisticsModel> extensionModel;
+    private final Optional<FileExtensionsStatisticsModel> extensionModel;
 
-    public ProcessorMessage(ExtensionsStatisticsModel model) {
+    public ProcessorMessage(FileExtensionsStatisticsModel model) {
         if (model == null) {
             extensionModel = Optional.empty();
         } else {
@@ -15,7 +15,7 @@ public class ProcessorMessage {
         }
     }
 
-    public Optional<ExtensionsStatisticsModel> getExtensionModel() {
+    public Optional<FileExtensionsStatisticsModel> getExtensionModel() {
         return extensionModel;
     }
 }

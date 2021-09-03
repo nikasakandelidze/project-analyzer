@@ -5,7 +5,7 @@ import domain.VirtualDir;
 import domain.VirtualFile;
 import domain.VirtualProject;
 import org.apache.commons.io.FilenameUtils;
-import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.Map;
 
 class MetadataStaticsticalProcessorImpl implements MetadataStatisticalProcessor {
     @Override
-    public ExtensionsStatisticsModel calculateExtensions(VirtualProject project) {
+    public FileExtensionsStatisticsModel calculateExtensions(VirtualProject project) {
         Map<String, List<String>> filledMap = getFilledMap(project);
-        return new ExtensionsStatisticsModel(filledMap);
+        return new FileExtensionsStatisticsModel(filledMap);
     }
 
     private Map<String, List<String>> getFilledMap(VirtualProject project) {
