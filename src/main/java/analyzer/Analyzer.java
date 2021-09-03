@@ -28,6 +28,7 @@ public class Analyzer {
                 long numberOfFilesWithExtension = extensionsStatisticsModel.getNumberOfFilesWithExtension(extension);
                 System.out.printf("Number of files with extension: %s is: %d%n", extension, numberOfFilesWithExtension);
                 System.out.println("Input ls to list all files");
+                System.out.print(">");
                 String nextLine = scanner.nextLine();
                 if (nextLine.equals("ls")) {
                     List<String> extensions = extensionsStatisticsModel.getNamesOfFilesWithExtension(extension);
