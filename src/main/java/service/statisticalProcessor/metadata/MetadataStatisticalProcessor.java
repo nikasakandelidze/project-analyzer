@@ -1,6 +1,6 @@
 package service.statisticalProcessor.metadata;
 
-import core.VirtualProject;
+import domain.VirtualProject;
 import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 
 public interface MetadataStatisticalProcessor {

@@ -1,6 +1,6 @@
 package analyzer;
 
-import core.VirtualProject;
+import domain.VirtualProject;
 import inputProcessor.InputProcessor;
 import inputProcessor.messages.InputMessage;
 import inputProcessor.messages.InputMessageType;

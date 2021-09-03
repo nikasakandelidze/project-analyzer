@@ -1,6 +1,6 @@
 package projectParser;
 
-import core.VirtualProject;
+import domain.VirtualProject;
 import projectParser.validator.ProjectParserValidator;
 
 import java.util.Optional;

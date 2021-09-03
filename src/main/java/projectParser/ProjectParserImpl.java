@@ -1,9 +1,9 @@
 package projectParser;
 
-import core.VirtualDir;
-import core.VirtualFile;
-import core.VirtualFileMetadata;
-import core.VirtualProject;
+import domain.VirtualDir;
+import domain.VirtualFile;
+import domain.VirtualFileMetadata;
+import domain.VirtualProject;
 import org.apache.commons.io.FilenameUtils;
 import projectParser.validator.ProjectParserValidator;
 import projectParser.validator.ValidationResult;

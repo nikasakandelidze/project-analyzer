@@ -1,6 +1,6 @@
 package service;
 
-import core.VirtualProject;
+import domain.VirtualProject;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.MetadataStatisticalProcessor;
 

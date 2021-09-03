@@ -1,9 +1,9 @@
 package service.statisticalProcessor.metadata;
 
 import common.CollectionsWrapper;
-import core.VirtualDir;
-import core.VirtualFile;
-import core.VirtualProject;
+import domain.VirtualDir;
+import domain.VirtualFile;
+import domain.VirtualProject;
 import org.apache.commons.io.FilenameUtils;
 import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 
