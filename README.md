@@ -16,10 +16,12 @@ Takes "Virtual Project" as an input and using bunch of processings and calculati
 
 
 # Building and using project
-In the root of the project use: ./gradlew clean shadowJar
+#### To Build jar, in the root of the project use:
+    ./gradlew clean shadowJar
 This will create build directory in the root of the project and then use:
-java -jar build/libs/XXX.jar to run the application
-
+#### To Run the program use:
+    java -jar build/libs/project-analyzer.jar {arg?}
+arg? is an optional argument. You can pass absolute/path/to/your/application. If arg? argument isn't specified current folder of jar file is used.
 # Current Present Commands:
 #### Name: COUNT_WITH_EXTENSION.
 #### Command: find -xc {arg}.
