@@ -1,8 +1,8 @@
-package processor;
+package service;
 
 import core.VirtualProject;
-import processor.output.ProcessorMessage;
-import processor.statisticalProcessor.metadata.MetadataStatisticalProcessor;
+import service.output.ProcessorMessage;
+import service.statisticalProcessor.metadata.MetadataStatisticalProcessor;
 
 public interface VirtualProjectProcessor {
     ProcessorMessage processVirtualProject(VirtualProject project);

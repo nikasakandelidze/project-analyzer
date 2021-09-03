@@ -1,11 +1,11 @@
-package processor.statisticalProcessor.metadata;
+package service.statisticalProcessor.metadata;
 
 import common.CollectionsWrapper;
 import core.VirtualDir;
 import core.VirtualFile;
 import core.VirtualProject;
 import org.apache.commons.io.FilenameUtils;
-import processor.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 
 import java.util.HashMap;
 import java.util.List;

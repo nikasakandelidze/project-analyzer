@@ -1,9 +1,9 @@
-package processor;
+package service;
 
 import core.VirtualProject;
-import processor.output.ProcessorMessage;
-import processor.statisticalProcessor.metadata.MetadataStatisticalProcessor;
-import processor.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.output.ProcessorMessage;
+import service.statisticalProcessor.metadata.MetadataStatisticalProcessor;
+import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 
 class VirtualProjectProcessorImpl implements VirtualProjectProcessor {
     private final MetadataStatisticalProcessor metadataStatisticalProcessor;

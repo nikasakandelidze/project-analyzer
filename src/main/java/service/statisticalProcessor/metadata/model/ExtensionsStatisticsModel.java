@@ -1,4 +1,4 @@
-package processor.statisticalProcessor.metadata.model;
+package service.statisticalProcessor.metadata.model;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class ExtensionsStatisticsModel {
     public List<String> getNamesOfFilesWithExtension(String extension) {
         return extensions.getOrDefault(extension, List.of());
     }
-    
+
     public Set<String> getExtensions() {
         return extensions.keySet();
     }

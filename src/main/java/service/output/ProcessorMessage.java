@@ -1,6 +1,6 @@
-package processor.output;
+package service.output;
 
-import processor.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 
 import java.util.Optional;
 

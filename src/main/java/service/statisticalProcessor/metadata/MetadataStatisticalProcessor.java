@@ -1,7 +1,7 @@
-package processor.statisticalProcessor.metadata;
+package service.statisticalProcessor.metadata;
 
 import core.VirtualProject;
-import processor.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 
 public interface MetadataStatisticalProcessor {
     ExtensionsStatisticsModel calculateExtensions(VirtualProject project);

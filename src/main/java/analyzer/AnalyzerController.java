@@ -1,9 +1,10 @@
 package analyzer;
 
 import core.VirtualProject;
-import processor.VirtualProjectProcessor;
-import processor.output.ProcessorMessage;
-import processor.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
+import presenter.Presenter;
+import service.VirtualProjectProcessor;
+import service.output.ProcessorMessage;
+import service.statisticalProcessor.metadata.model.ExtensionsStatisticsModel;
 import projectParser.ProjectParser;
 import projectParser.validator.ProjectParserValidator;
 
@@ -12,27 +13,34 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class Analyzer {
+public class AnalyzerController {
+    private final Presenter presenter;
+    private final VirtualProjectProcessor processor;
 
-    public static void main(String[] args) {
-        Optional<VirtualProject> project = initProjectAnalyzer("/home/nika/personal_stuff/personal_projects/project-analyzer");
-        VirtualProjectProcessor processor = VirtualProjectProcessor.create();
+
+    public AnalyzerController(Presenter presenter, VirtualProjectProcessor processor) {
+        this.presenter = presenter;
+        this.processor = processor;
+    }
+
+    public void analyze(String path) {
+        Optional<VirtualProject> project = initProjectAnalyzer(path);
         ProcessorMessage processorMessage = processor.processVirtualProject(project.get());
         ExtensionsStatisticsModel extensionsStatisticsModel = processorMessage.getExtensionModel().get();
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         while (true) {
-            System.out.print("> ");
+            presenter.showMessage("> ");
             String inputLine = scanner.nextLine();
             if (inputLine.contains("find -x ")) {
                 String extension = inputLine.substring(8);
                 long numberOfFilesWithExtension = extensionsStatisticsModel.getNumberOfFilesWithExtension(extension);
-                System.out.printf("Number of files with extension: %s is: %d%n", extension, numberOfFilesWithExtension);
-                System.out.println("Input ls to list all files");
-                System.out.print(">");
+                presenter.showMessage(String.format("Number of files with extension: %s is: %d%n", extension, numberOfFilesWithExtension));
+                presenter.showMessage("Input ls to list all files");
+                presenter.showMessage(">");
                 String nextLine = scanner.nextLine();
                 if (nextLine.equals("ls")) {
                     List<String> extensions = extensionsStatisticsModel.getNamesOfFilesWithExtension(extension);
-                    extensions.forEach(System.out::println);
+                    extensions.forEach(presenter::showMessage);
                 } else {
 
                 }

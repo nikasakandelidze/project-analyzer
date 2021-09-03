@@ -12,7 +12,7 @@ repositories {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'analyzer.Analyzer'
+        attributes 'Main-Class': 'analyzer.Main'
     }
 }
 
