@@ -12,6 +12,7 @@ import service.VirtualProjectProcessor;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public class AnalyzerController {
                     });
                     Optional<Tuple<String, Integer>> max = mapWithExtensionCounts.keySet().stream()
                             .map(e -> new Tuple<>(e, mapWithExtensionCounts.get(e)))
-                            .max((a, b) -> a.getSecond() - b.getSecond());
+                            .max(Comparator.comparingInt(Tuple::getSecond));
                     Tuple<String, Integer> stringIntegerTuple = max.get();
                     presenter.showMessage("Extension with most files: " + stringIntegerTuple.getFirst() + ", Count: " + stringIntegerTuple.getSecond());
                 } else if (inputMessageType == InputMessageType.EXIT) {
