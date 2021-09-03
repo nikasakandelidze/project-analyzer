@@ -16,6 +16,10 @@ jar {
     }
 }
 
+shadowJar{
+    archiveFileName = 'project-analyzer-cli.jar'
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
