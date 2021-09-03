@@ -28,7 +28,7 @@ arg? is an optional argument. You can pass absolute/path/to/your/application. If
 Details:  Command: "find -xc arg?". (Where "arg" is optional. flags: x - for extension, c - for count). If argument is specified finds count of number of files with specified "arg" extension, if no arg is specified command will print all extension and according counts for all of them.
 
 #### Name: LS_WITH_EXTENSION.
-#### Command: find -lc {arg}.
+#### Command: find -xl {arg}.
 Details:  Command: "find -xl arg". (Where "arg" is mandatory. flags: x - for extension, l - for list). Finds and lists all of file names that have extension as one specified in "arg" argument.
 
 #### Name: COUNT_ALL_EXTENSIONS.
