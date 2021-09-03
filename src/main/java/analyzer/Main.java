@@ -6,10 +6,14 @@ import service.VirtualProjectProcessor;
 
 public class Main {
     public static void main(String[] args) {
+        String pathToPRoject = ".";
+        if (args.length == 1) {
+            pathToPRoject = args[0];
+        }
         Presenter presenter = Presenter.create();
         VirtualProjectProcessor processor = VirtualProjectProcessor.create();
         InputProcessor inputProcessor = InputProcessor.create();
         AnalyzerController analyzerController = new AnalyzerController(presenter, processor, inputProcessor);
-        analyzerController.analyze("/home/nika/personal_stuff/personal_projects/project-analyzer");
+        analyzerController.analyze(pathToPRoject);
     }
 }
