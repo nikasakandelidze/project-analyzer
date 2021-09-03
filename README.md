@@ -13,3 +13,9 @@ Analyze parsed data. make asumptions, create statistics, heatmaps, history of th
 # Module 3: Processor
 
 Takes "Virtual Project" as an input and using bunch of processings and calculations outputs useful data
+
+
+# Building and using project
+In the root of the project use: ./gradlew clean shadowJar
+This will create build directory in the root of the project and then use:
+java -jar build/libs/XXX.jar to run the application

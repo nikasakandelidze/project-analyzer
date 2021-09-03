@@ -18,7 +18,7 @@ public class ExtensionsStatisticsModel {
     public List<String> getNamesOfFilesWithExtension(String extension) {
         return extensions.getOrDefault(extension, List.of());
     }
-
+    
     public Set<String> getExtensions() {
         return extensions.keySet();
     }
