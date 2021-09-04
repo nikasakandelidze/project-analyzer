@@ -1,5 +1,6 @@
 package analyzer;
 
+import common.CollectionsWrapper;
 import common.Tuple;
 import domain.VirtualProject;
 import inputProcessor.InputProcessor;
@@ -9,14 +10,16 @@ import presenter.Presenter;
 import projectParser.ProjectParser;
 import projectParser.validator.ProjectParserValidator;
 import service.VirtualProjectProcessor;
+import service.gitProcessor.GitDataMessage;
+import service.gitProcessor.entity.Commit;
+import service.gitProcessor.entity.User;
 import service.help.HelpMessage;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class AnalyzerController {
     private final Presenter presenter;
@@ -57,9 +60,24 @@ public class AnalyzerController {
                     Tuple<String, Integer> stringIntegerTuple = max.get();
                     presenter.showMessage("Extension with most files: " + stringIntegerTuple.getFirst() + ", Count: " + stringIntegerTuple.getSecond());
                 } else if (inputMessageType == InputMessageType.HELP) {
-                    String helpDirective = input.getArguments().get(0);
                     HelpMessage helpMessage = processor.buildHelpMessage();
                     presenter.showMessage(helpMessage.getMessage());
+                } else if (inputMessageType == InputMessageType.GIT_USERS_COMMITS_COUNTS) {
+                    GitDataMessage gitDataMessage = processor.processGitData(path);
+                    Map<User, List<Commit>> commits = new HashMap<>();
+                    gitDataMessage.getCommits()
+                            .forEach(commit -> {
+                                User author = commit.getAuthor();
+                                if (commits.containsKey(author)) {
+                                    commits.get(author).add(commit);
+                                } else {
+                                    commits.put(author, CollectionsWrapper.mutableListWithFirstElement(commit));
+                                }
+                            });
+                    presenter.showMessage("     Presenting Users commit statistics:");
+                    commits.keySet().forEach(user -> {
+                        presenter.showMessage(String.format("User %s (email: %s).\n - Number of commits: %d.", user.getName(), user.getEmail(), commits.get(user).size()));
+                    });
                 } else if (inputMessageType == InputMessageType.EXIT) {
                     presenter.showMessage("Exiting file analyzer.");
                     break;
