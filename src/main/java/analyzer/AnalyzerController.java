@@ -64,26 +64,44 @@ public class AnalyzerController {
                     presenter.showMessage(helpMessage.getMessage());
                 } else if (inputMessageType == InputMessageType.GIT_USERS_COMMITS_COUNTS) {
                     GitDataMessage gitDataMessage = processor.processGitData(path);
-                    Map<User, List<Commit>> commits = new HashMap<>();
-                    gitDataMessage.getCommits()
-                            .forEach(commit -> {
-                                User author = commit.getAuthor();
-                                if (commits.containsKey(author)) {
-                                    commits.get(author).add(commit);
-                                } else {
-                                    commits.put(author, CollectionsWrapper.mutableListWithFirstElement(commit));
-                                }
-                            });
+                    Map<User, List<Commit>> commits = getUserListMap(gitDataMessage);
                     presenter.showMessage("     Presenting Users commit statistics:");
                     commits.keySet().forEach(user -> {
                         presenter.showMessage(String.format("User %s (email: %s).\n - Number of commits: %d.", user.getName(), user.getEmail(), commits.get(user).size()));
                     });
+                } else if (inputMessageType == InputMessageType.GIT_USERS_COMMITS_EDGES) {
+                    GitDataMessage gitDataMessage = processor.processGitData(path);
+                    Map<User, List<Commit>> commits = getUserListMap(gitDataMessage);
+                    Optional<Map.Entry<User, List<Commit>>> max = commits.entrySet().stream().max((a, b) -> a.getValue().size() - b.getValue().size());
+                    Optional<Map.Entry<User, List<Commit>>> min = commits.entrySet().stream().min((a, b) -> a.getValue().size() - b.getValue().size());
+                    if (max.isPresent()) {
+                        Map.Entry<User, List<Commit>> maxData = max.get();
+                        Map.Entry<User, List<Commit>> minData = min.get();
+                        presenter.showMessage(String.format("User %s ( email: %s ) has max number of commits. Number of commits: %d", maxData.getKey().getName(), maxData.getKey().getEmail(), maxData.getValue().size()));
+                        presenter.showMessage(String.format("User %s ( email: %s ) has min number of commits. Number of commits: %d", minData.getKey().getName(), minData.getKey().getEmail(), minData.getValue().size()));
+                    } else {
+                        presenter.showMessage("Can't find edge data for commits.");
+                    }
                 } else if (inputMessageType == InputMessageType.EXIT) {
                     presenter.showMessage("Exiting file analyzer.");
                     break;
                 }
             }
         }
+    }
+
+    private Map<User, List<Commit>> getUserListMap(GitDataMessage gitDataMessage) {
+        Map<User, List<Commit>> commits = new HashMap<>();
+        gitDataMessage.getCommits()
+                .forEach(commit -> {
+                    User author = commit.getAuthor();
+                    if (commits.containsKey(author)) {
+                        commits.get(author).add(commit);
+                    } else {
+                        commits.put(author, CollectionsWrapper.mutableListWithFirstElement(commit));
+                    }
+                });
+        return commits;
     }
 
     private static Optional<VirtualProject> initProjectAnalyzer(String projectPath) {

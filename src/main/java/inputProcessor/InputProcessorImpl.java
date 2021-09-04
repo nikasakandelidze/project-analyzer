@@ -12,25 +12,27 @@ class InputProcessorImpl implements InputProcessor {
 
     @Override
     public InputMessage getInput() {
-        System.out.print(">");
+        System.out.print("> ");
         String line = scanner.nextLine();
-        if (line.contains("find -xc")) {
-            if (line.length() == 8) {
+        if (line.contains("ls -xc")) {
+            if (line.length() == 6) {
                 return new InputMessage(InputMessageType.COUNT_ALL_EXTENSIONS, List.of());
             } else {
-                String extension = line.substring(9);
+                String extension = line.substring(7);
                 return new InputMessage(InputMessageType.COUNT_WITH_EXTENSION, List.of(extension));
             }
-        } else if (line.contains("find -xl ")) {
-            String extension = line.substring(9);
+        } else if (line.contains("ls -x ")) {
+            String extension = line.substring(6);
             return new InputMessage(InputMessageType.LS_WITH_EXTENSION, List.of(extension));
         } else if (line.contains("help")) {
             String helpDirective = line.trim().substring(4);
             return new InputMessage(InputMessageType.HELP, List.of(helpDirective));
         } else if (line.contains("exit")) {
             return new InputMessage(InputMessageType.EXIT, List.of());
-        } else if (line.contains("git -ccu")) {
+        } else if (line.contains("commit count")) {
             return new InputMessage(InputMessageType.GIT_USERS_COMMITS_COUNTS, List.of());
+        } else if (line.contains("commit edge")) {
+            return new InputMessage(InputMessageType.GIT_USERS_COMMITS_EDGES, List.of());
         } else {
             return null;
         }
