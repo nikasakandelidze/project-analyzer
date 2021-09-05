@@ -39,4 +39,8 @@ public class User {
     public int hashCode() {
         return Objects.hash(name, email);
     }
+
+    public String toString() {
+        return this.name + " (email: " + this.getEmail() + ")";
+    }
 }

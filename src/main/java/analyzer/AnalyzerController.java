@@ -17,9 +17,11 @@ import service.help.HelpMessage;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.counting;
 
 public class AnalyzerController {
     private final Presenter presenter;
@@ -82,12 +84,41 @@ public class AnalyzerController {
                     } else {
                         presenter.showMessage("Can't find edge data for commits.");
                     }
+                } else if (inputMessageType == InputMessageType.GIT_USERS_COMMITS_DATE) {
+                    GitDataMessage gitDataMessage = processor.processGitData(path);
+                    Map<String, List<Commit>> dateListMap = getDateListMap(gitDataMessage);
+                    dateListMap.keySet().forEach(date -> {
+                        List<Commit> commits = dateListMap.get(date);
+                        Tuple<User, Long> mostActiveUserOfDate = getMostActiveUserOfDate(date, dateListMap);
+                        Tuple<User, Long> leastActiveUserOfDate = getLeastActiveUserOfDate(date, dateListMap);
+                        presenter.showMessage("Date: " + date.toString() + ". Total Number of commits: " + commits.size());
+                        presenter.showMessage("  (MAX) - User:" + mostActiveUserOfDate.getFirst() + " had most commits of: " + mostActiveUserOfDate.getSecond() + " on this day.");
+                        presenter.showMessage("  (MIN) - User:" + leastActiveUserOfDate.getFirst() + " had least commits of: " + leastActiveUserOfDate.getSecond() + " on this day.");
+                    });
                 } else if (inputMessageType == InputMessageType.EXIT) {
                     presenter.showMessage("Exiting file analyzer.");
                     break;
                 }
             }
         }
+    }
+
+    private Tuple<User, Long> getMostActiveUserOfDate(String date, Map<String, List<Commit>> dateListMap) {
+        List<Commit> commits = dateListMap.get(date);
+        Map<User, Long> collect = commits.stream()
+                .filter(e -> getDateString(e.getDate()).equals(date))
+                .collect(Collectors.groupingBy(Commit::getAuthor, counting()));
+        Optional<Map.Entry<User, Long>> max = collect.entrySet().stream().max((a, b) -> (int) (a.getValue() - b.getValue()));
+        return max.map(e -> new Tuple<User, Long>(e.getKey(), e.getValue())).orElse(null);
+    }
+
+    private Tuple<User, Long> getLeastActiveUserOfDate(String date, Map<String, List<Commit>> dateListMap) {
+        List<Commit> commits = dateListMap.get(date);
+        Map<User, Long> collect = commits.stream()
+                .filter(e -> getDateString(e.getDate()).equals(date))
+                .collect(Collectors.groupingBy(Commit::getAuthor, counting()));
+        Optional<Map.Entry<User, Long>> max = collect.entrySet().stream().min((a, b) -> (int) (a.getValue() - b.getValue()));
+        return max.map(e -> new Tuple<User, Long>(e.getKey(), e.getValue())).orElse(null);
     }
 
     private Map<User, List<Commit>> getUserListMap(GitDataMessage gitDataMessage) {
@@ -102,6 +133,29 @@ public class AnalyzerController {
                     }
                 });
         return commits;
+    }
+
+    private Map<String, List<Commit>> getDateListMap(GitDataMessage gitDataMessage) {
+        Map<String, List<Commit>> commits = new HashMap<>();
+        gitDataMessage.getCommits()
+                .forEach(commit -> {
+                    Date date = commit.getDate();
+                    String currentDateKey = getDateString(date);
+                    if (commits.containsKey(currentDateKey)) {
+                        commits.get(currentDateKey).add(commit);
+                    } else {
+                        commits.put(currentDateKey, CollectionsWrapper.mutableListWithFirstElement(commit));
+                    }
+                });
+        return commits;
+    }
+
+    private String getDateString(Date date) {
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+        String day = dayFormat.format(date);
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
+        String month = monthFormat.format(date);
+        return day + " " + month;
     }
 
     private static Optional<VirtualProject> initProjectAnalyzer(String projectPath) {

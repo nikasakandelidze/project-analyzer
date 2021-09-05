@@ -6,4 +6,5 @@ public class HelpMessageConstants {
     public static String HELP_EXIT = "Command: \"exit\". Exits CLI program.";
     public static String GIT_COMMIT_COUNT = "Command: \"commit count\". Processes and Outputs statistics and data of users and their commits from using git Version control used for project.";
     public static String GIT_COMMIT_EDGE = "Command: \"commit edge\". Processes and Outputs edge ( max, min..) statistics and data of users and their commits from using git Version control used for project.";
+    public static String GIT_COMMIT_DATE = "Command: \"commit edge\". Processes and Outputs edge ( max, min..) statistics and data of users and their commits from using git Version control used for project.";
 }
