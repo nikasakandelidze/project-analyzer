@@ -39,6 +39,13 @@ Details:  Command: "find -xc arg?". (Where "arg" is optional. flags: x - for ext
 #### Command: exit.
 Details:  Command: "exit". Exits CLI program.
 
+#### Name: COMMIT COUNT
+#### Command: commit count
+Details: Lists commits statistics in the context of users for the project.
+
+#### Name: Commit EDGE
+#### Command: commit edge
+Details: Lists edge statistics for commits( max commits, min commits...) in the context of users.
 
 # Diagram
 ![flow diagram](./statics/diagram.png)
