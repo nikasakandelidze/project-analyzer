@@ -31,7 +31,7 @@ class GitProcessorImpl implements GitProcessor {
                     }).collect(Collectors.toList());
             return new GitDataMessage(commits);
         } catch (Exception exc) {
-            System.out.println(exc.getMessage());
+            System.out.println("Git commands can't be used in this project.");
             return new GitDataMessage(List.of());
         }
     }
