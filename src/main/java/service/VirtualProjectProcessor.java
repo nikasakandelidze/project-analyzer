@@ -7,6 +7,10 @@ import service.help.HelpMessage;
 import service.help.HelpMessageBuilder;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.MetadataStatisticalProcessor;
+import service.tree.TreeMessage;
+import service.tree.TreeProcessor;
+
+import java.util.function.Consumer;
 
 public interface VirtualProjectProcessor {
     ProcessorMessage processVirtualProject(VirtualProject project);
@@ -15,10 +19,13 @@ public interface VirtualProjectProcessor {
 
     GitDataMessage processGitData(String path);
 
+    TreeMessage processTree(VirtualProject virtualProject, Consumer<String> dataConsumer);
+
     static VirtualProjectProcessor create() {
         MetadataStatisticalProcessor metadataStatisticalProcessor = MetadataStatisticalProcessor.create();
         HelpMessageBuilder helpMessageBuilder = HelpMessageBuilder.create();
         GitProcessor gitProcessor = GitProcessor.create();
-        return new VirtualProjectProcessorImpl(metadataStatisticalProcessor, helpMessageBuilder, gitProcessor);
+        TreeProcessor treeProcessor = TreeProcessor.create();
+        return new VirtualProjectProcessorImpl(metadataStatisticalProcessor, helpMessageBuilder, gitProcessor, treeProcessor);
     }
 }

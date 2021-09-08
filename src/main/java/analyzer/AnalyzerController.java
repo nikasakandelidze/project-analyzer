@@ -16,6 +16,7 @@ import service.gitProcessor.entity.User;
 import service.help.HelpMessage;
 import service.output.ProcessorMessage;
 import service.statisticalProcessor.metadata.model.FileExtensionsStatisticsModel;
+import service.tree.TreeMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -95,6 +96,9 @@ public class AnalyzerController {
                         presenter.showMessage("  (MAX) - User:" + mostActiveUserOfDate.getFirst() + " had most commits of: " + mostActiveUserOfDate.getSecond() + " on this day.");
                         presenter.showMessage("  (MIN) - User:" + leastActiveUserOfDate.getFirst() + " had least commits of: " + leastActiveUserOfDate.getSecond() + " on this day.");
                     });
+                } else if (inputMessageType == InputMessageType.TREE) {
+                    TreeMessage message = processor.processTree(project.get(), presenter::showMessage);
+
                 } else if (inputMessageType == InputMessageType.EXIT) {
                     presenter.showMessage("Exiting file analyzer.");
                     break;

@@ -35,7 +35,10 @@ class InputProcessorImpl implements InputProcessor {
             return new InputMessage(InputMessageType.GIT_USERS_COMMITS_EDGES, List.of());
         } else if (line.contains("commit date")) {
             return new InputMessage(InputMessageType.GIT_USERS_COMMITS_DATE, List.of());
-        } else {
+        } else if(line.contains("tree")){
+            return new InputMessage(InputMessageType.TREE, List.of());
+        }
+        else {
             return null;
         }
     }

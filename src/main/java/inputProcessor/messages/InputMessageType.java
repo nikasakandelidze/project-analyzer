@@ -8,7 +8,8 @@ public enum InputMessageType {
     COUNT_ALL_EXTENSIONS(HelpMessageConstants.HELP_COUNT_WITH_EXTENSION, "find -xc"),
     GIT_USERS_COMMITS_COUNTS(HelpMessageConstants.GIT_COMMIT_COUNT, "commit count"),
     GIT_USERS_COMMITS_EDGES(HelpMessageConstants.GIT_COMMIT_EDGE, "commit edge"),
-    GIT_USERS_COMMITS_DATE(HelpMessageConstants.GIT_COMMIT_DATE, "commit edge"),
+    GIT_USERS_COMMITS_DATE(HelpMessageConstants.GIT_COMMIT_DATE, "commit date"),
+    TREE(HelpMessageConstants.TREE, "commit date"),
     HELP("", ""),
     EXIT(HelpMessageConstants.HELP_EXIT, "exit");
 
